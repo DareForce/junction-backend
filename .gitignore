@@ -4,7 +4,10 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-junction-secret/**
+application-aws.yml
+application-dev.yml
+ingredient_init.sql
+./junction-secret/*
 ### STS ###
 .apt_generated
 .classpath

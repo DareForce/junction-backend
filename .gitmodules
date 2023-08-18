@@ -1,0 +1,4 @@
+[submodule "junction-secret"]
+	path = junction-secret
+	url = https://github.com/DareForce/junction-secret.git
+	branch = main
