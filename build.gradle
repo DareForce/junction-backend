@@ -32,8 +32,28 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //aws
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    implementation "ca.pjer:logback-awslogs-appender:1.6.0"
+
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+task copyPrivate(type: Copy) {
+    copy {
+        from './junction-secret'
+        include "application-aws.yml"
+        into 'src/main/resources'
+    }
+
+    copy {
+        from './junction-secret'
+        include "application-dev.yml"
+        into 'src/main/resources'
+    }
 }
