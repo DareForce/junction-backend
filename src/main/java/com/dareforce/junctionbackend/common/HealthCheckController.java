@@ -1,4 +1,4 @@
-package com.dareforce.junctionbackend.config;
+package com.dareforce.junctionbackend.common;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

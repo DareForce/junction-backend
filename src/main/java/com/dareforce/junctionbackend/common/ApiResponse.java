@@ -1,4 +1,4 @@
-package com.dareforce.junctionbackend.config;
+package com.dareforce.junctionbackend.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
