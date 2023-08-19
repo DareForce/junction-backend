@@ -28,6 +28,8 @@ public class Menu {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    private String thumbnail;
+
     @Column(nullable = false)
     private String name;
 }

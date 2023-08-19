@@ -28,6 +28,10 @@ public class Restaurant {
     @Column(nullable = false)
     private String name;
 
+    private String thumbnail;
+
+    private String category;
+
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Menu> menus = new ArrayList<>();
 }
