@@ -11,8 +11,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(
@@ -39,5 +41,11 @@ public class UserIngred {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingred_id")
     private Ingredient ingredient;
+
+    @Builder
+    public UserIngred(User user, Ingredient ingredient) {
+        this.user = user;
+        this.ingredient = ingredient;
+    }
 
 }

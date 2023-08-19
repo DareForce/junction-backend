@@ -8,6 +8,7 @@ application-aws.yml
 application-dev.yml
 ingredient_init.sql
 ./junction-secret/*
+application-local.yml
 ### STS ###
 .apt_generated
 .classpath

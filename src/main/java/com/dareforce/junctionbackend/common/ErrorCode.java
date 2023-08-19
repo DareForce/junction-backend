@@ -25,6 +25,7 @@ public enum ErrorCode {
    * User Domain
    */
   USER_NOT_FOUND(400, "U001", "유저가 존재하지 않습니다."),
+  INGRED_NOT_FOUND(400, "I001", "재료를 찾을 수 없습니다."),
 
 
   /*
