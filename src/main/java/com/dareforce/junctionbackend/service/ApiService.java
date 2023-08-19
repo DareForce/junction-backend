@@ -4,28 +4,33 @@ import static com.dareforce.junctionbackend.common.ErrorCode.INGRED_NOT_FOUND;
 
 import com.dareforce.junctionbackend.common.error.exception.NotFoundException;
 import com.dareforce.junctionbackend.domain.Ingredient;
+import com.dareforce.junctionbackend.domain.Restaurant;
 import com.dareforce.junctionbackend.domain.User;
 import com.dareforce.junctionbackend.domain.UserIngred;
+import com.dareforce.junctionbackend.dto.RestaurantDto;
 import com.dareforce.junctionbackend.dto.UserRequestDto;
 import com.dareforce.junctionbackend.repository.IngredRepository;
+import com.dareforce.junctionbackend.repository.RestaurantRepository;
 import com.dareforce.junctionbackend.repository.UserIngredRepository;
 import com.dareforce.junctionbackend.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class ApiService {
 
     private final UserRepository userRepository;
 
     private final IngredRepository ingredRepository;
 
     private final UserIngredRepository userIngredRepository;
+
+    private final RestaurantRepository restaurantRepository;
 
     @Transactional
     public void signUp(UserRequestDto requestDto) {
@@ -47,6 +52,12 @@ public class UserService {
             userIngreds.add(new UserIngred(savedUser, ingredient));
         }
         userIngredRepository.saveAll(userIngreds);
+    }
+
+    @Transactional
+    public List<RestaurantDto> getRestaurants() {
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+        return restaurants.stream().map(RestaurantDto::from).collect(Collectors.toList());
     }
 
 }
