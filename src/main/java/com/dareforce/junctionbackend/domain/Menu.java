@@ -33,4 +33,6 @@ public class Menu {
 
     @Column(nullable = false)
     private String name;
+
+    private Long price = 0L;
 }

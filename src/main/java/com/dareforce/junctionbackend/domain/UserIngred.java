@@ -40,6 +40,4 @@ public class UserIngred {
     @JoinColumn(name = "ingred_id")
     private Ingredient ingredient;
 
-    @Column(nullable = false)
-    private Boolean isDisliked = Boolean.FALSE;
 }
