@@ -1,6 +1,7 @@
 package com.dareforce.junctionbackend;
 
 import com.dareforce.junctionbackend.common.ApiResponse;
+import com.dareforce.junctionbackend.dto.MenuDetailDto;
 import com.dareforce.junctionbackend.dto.MenuDto;
 import com.dareforce.junctionbackend.dto.RestaurantDto;
 import com.dareforce.junctionbackend.dto.UserRequestDto;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -52,4 +54,16 @@ public class ApiController {
                 .build();
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/menu/{menuId}")
+    public ResponseEntity<ApiResponse<MenuDetailDto>> getMenuDetailById(@RequestParam Long userId, @PathVariable Long menuId) {
+        ApiResponse response = ApiResponse.builder()
+                .message("메뉴 상세 정보 조회 성공")
+                .status(HttpStatus.OK.value())
+                .data(apiService.getMenuDetailById(menuId, userId))
+                .build();
+        return ResponseEntity.ok(response);
+
+    }
+
 }
