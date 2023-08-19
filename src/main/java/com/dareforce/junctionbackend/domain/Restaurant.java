@@ -28,6 +28,7 @@ public class Restaurant {
     @Column(nullable = false)
     private String name;
 
+    @Column(length = 300)
     private String thumbnail;
 
     private String category;

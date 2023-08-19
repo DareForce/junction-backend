@@ -22,4 +22,6 @@ public class Ingredient {
 
     @Column(nullable = false)
     private String name;
+
+    private Boolean isAllergic = Boolean.FALSE;
 }
