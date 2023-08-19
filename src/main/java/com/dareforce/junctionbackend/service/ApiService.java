@@ -4,12 +4,15 @@ import static com.dareforce.junctionbackend.common.ErrorCode.INGRED_NOT_FOUND;
 
 import com.dareforce.junctionbackend.common.error.exception.NotFoundException;
 import com.dareforce.junctionbackend.domain.Ingredient;
+import com.dareforce.junctionbackend.domain.Menu;
 import com.dareforce.junctionbackend.domain.Restaurant;
 import com.dareforce.junctionbackend.domain.User;
 import com.dareforce.junctionbackend.domain.UserIngred;
+import com.dareforce.junctionbackend.dto.MenuDto;
 import com.dareforce.junctionbackend.dto.RestaurantDto;
 import com.dareforce.junctionbackend.dto.UserRequestDto;
 import com.dareforce.junctionbackend.repository.IngredRepository;
+import com.dareforce.junctionbackend.repository.MenuRepository;
 import com.dareforce.junctionbackend.repository.RestaurantRepository;
 import com.dareforce.junctionbackend.repository.UserIngredRepository;
 import com.dareforce.junctionbackend.repository.UserRepository;
@@ -31,6 +34,8 @@ public class ApiService {
     private final UserIngredRepository userIngredRepository;
 
     private final RestaurantRepository restaurantRepository;
+
+    private final MenuRepository menuRepository;
 
     @Transactional
     public void signUp(UserRequestDto requestDto) {
@@ -57,7 +62,11 @@ public class ApiService {
     @Transactional
     public List<RestaurantDto> getRestaurants() {
         List<Restaurant> restaurants = restaurantRepository.findAll();
-        return restaurants.stream().map(RestaurantDto::from).collect(Collectors.toList());
+        return restaurants.stream().map(RestaurantDto::from).toList();
     }
 
+    public List<MenuDto> getMenuByRestaurantId(Long restaurantId) {
+        List<Menu> menus = menuRepository.findByRestaurantId(restaurantId);
+        return menus.stream().map(MenuDto::from).toList();
+    }
 }
