@@ -75,7 +75,6 @@ public class ApiService {
         List<Menu> menus = menuRepository.findByRestaurantId(restaurantId);
         List<Ingredient> allergyInfoOfUser = userIngredRepository.findAllByUserId(userId).stream().map(
                 UserIngred::getIngredient).toList();
-
         return menus.stream().map(menu1 -> {
             List<Ingredient> ingredInMenu = menu1.getMenuIngreds().stream().map(MenuIngred::getIngredient).toList();
             List<String> allergyOfUserInMenu = new ArrayList<>();
