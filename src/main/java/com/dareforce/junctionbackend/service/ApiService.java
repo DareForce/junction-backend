@@ -1,6 +1,7 @@
 package com.dareforce.junctionbackend.service;
 
 import static com.dareforce.junctionbackend.common.ErrorCode.*;
+import static java.awt.SystemColor.menu;
 
 import com.dareforce.junctionbackend.common.ErrorCode;
 import com.dareforce.junctionbackend.common.error.exception.NotFoundException;
@@ -70,9 +71,26 @@ public class ApiService {
         return restaurants.stream().map(RestaurantDto::from).toList();
     }
 
-    public List<MenuDto> getMenuByRestaurantId(Long restaurantId) {
+    public List<MenuDto> getMenuByRestaurantId(Long restaurantId, Long userId) {
         List<Menu> menus = menuRepository.findByRestaurantId(restaurantId);
-        return menus.stream().map(MenuDto::from).toList();
+        List<Ingredient> allergyInfoOfUser = userIngredRepository.findAllByUserId(userId).stream().map(
+                UserIngred::getIngredient).toList();
+
+        return menus.stream().map(menu1 -> {
+            List<Ingredient> ingredInMenu = menu1.getMenuIngreds().stream().map(MenuIngred::getIngredient).toList();
+            List<String> allergyOfUserInMenu = new ArrayList<>();
+
+            for (Ingredient inMenu : ingredInMenu) {
+                for (Ingredient ingredient : allergyInfoOfUser) {
+                    if (ingredient.getId().equals(inMenu.getId())) {
+                        allergyOfUserInMenu.add(inMenu.getName());
+                    }
+                }
+            }
+            MenuDto dto = MenuDto.from(menu1);
+            dto.setIngredients(allergyOfUserInMenu);
+            return dto;
+        }).toList();
     }
 
     public MenuDetailDto getMenuDetailById(Long menuId, Long userId) {

@@ -19,7 +19,7 @@ public class MenuDto {
 
     private final String thumbnail;
 
-    private final List<String> ingredients;
+    private List<String> ingredients;
 
     public static MenuDto from(Menu menu) {
         return MenuDto.builder()
@@ -27,8 +27,10 @@ public class MenuDto {
                 .name(menu.getName())
                 .price(menu.getPrice())
                 .thumbnail(menu.getThumbnail())
-                .ingredients(menu.getMenuIngreds().stream().map(menuIngred -> menuIngred.getIngredient().getName()).collect(
-                        Collectors.toList()))
                 .build();
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 }

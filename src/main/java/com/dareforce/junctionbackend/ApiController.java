@@ -46,11 +46,11 @@ public class ApiController {
     }
 
     @GetMapping("/restaurant/{restaurantId}/menu")
-    public ResponseEntity<ApiResponse<List<MenuDto>>> getMenuByRestaurantId(@PathVariable Long restaurantId) {
+    public ResponseEntity<ApiResponse<List<MenuDto>>> getMenuByRestaurantId(@RequestParam Long userId, @PathVariable Long restaurantId) {
         ApiResponse response = ApiResponse.builder()
                 .message("메뉴 가져오기 성공")
                 .status(HttpStatus.OK.value())
-                .data(apiService.getMenuByRestaurantId(restaurantId))
+                .data(apiService.getMenuByRestaurantId(restaurantId, userId))
                 .build();
         return ResponseEntity.ok(response);
     }
